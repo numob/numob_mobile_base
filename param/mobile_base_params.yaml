@@ -1,0 +1,10 @@
+ros_rate: 20.0 #Hz
+wheel_diameter: 0.15
+wheel_track: 0.425
+#wheel_encoder_resolution: 2200 # Brushed Motor
+wheel_encoder_resolution: 672 # BLDC Motor
+ultrasound_offset: [0.25, 0.25, 0.25, 0.25, 0.25] #distance to the center of the mobile base (base_link)
+ultrasound_angles: [31.64, 0.0, -31.64, -146.76, -213.24] # degrees. counter-clockwise.
+#ultrasound_used: [0, 1, 2, 3 ,4]  #Use all 5 sensors to publish PointCloud
+ultrasound_used: [ 1 ] #Use the front one to publish PointCloud
+ultrasound_max_valid_range: 0.6 # Value beyond this value will be set to a big enough value in point cloud.

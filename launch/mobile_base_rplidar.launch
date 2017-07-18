@@ -1,0 +1,25 @@
+<launch>
+    <node pkg="numob_mobile_base" type="numob_mobile_base" name="numob_mobile_base" output="screen">
+        <rosparam file="$(find numob_mobile_base)/param/mobile_base_params.yaml" command="load"/>
+    </node>
+
+    <node pkg="tf" type="static_transform_publisher" name="tf_base_link_laser"
+          args="0.2 0 0 0 0 0 base_link laser 100"/>
+
+    <node pkg="numob_mobile_base" type="laser_footprint_filter" name="laser_footprint_filter" output="screen">
+        <param name="footprint_inscribed_radius" value="0.25"/>
+        <param name="base_frame" value="base_link"/>
+    </node>
+
+    <node name="rplidarNode" pkg="rplidar_ros" type="rplidarNode" output="screen">
+        <param name="serial_port" type="string" value="/dev/rplidar"/>
+        <param name="serial_baudrate" type="int" value="115200"/>
+        <param name="frame_id" type="string" value="laser"/>
+        <param name="inverted" type="bool" value="false"/>
+        <param name="angle_compensate" type="bool" value="true"/>
+        <remap from="scan" to="scan_raw"/>
+    </node>
+
+
+
+</launch>
